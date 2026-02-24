@@ -1,0 +1,36 @@
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-subtitle {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.app-title {
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+.sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+.app-sidenav {
+  width: 240px;
+}
+
+.main-content {
+  background-color: #fafafa;
+  min-height: 100%;
+}
+
+.active-link {
+  background-color: rgba(0, 0, 0, 0.04);
+}

@@ -1,0 +1,58 @@
+@if (loading) {
+  <lib-loading-spinner message="Loading user details..." />
+} @else if (user) {
+  <div class="detail-container">
+    <button mat-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon> Back to Users
+    </button>
+
+    <mat-card class="user-card">
+      <mat-card-header>
+        <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
+        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <span class="label">Role</span>
+            <mat-chip [style.background-color]="user.role | roleBadgeColor" style="color: white;">
+              {{ user.role }}
+            </mat-chip>
+          </div>
+
+          <div class="detail-item">
+            <span class="label">Status</span>
+            <span class="status-badge" [class.active]="user.status === 'active'"
+                  [class.inactive]="user.status === 'inactive'">
+              {{ user.status | statusLabel }}
+            </span>
+          </div>
+
+          <div class="detail-item">
+            <span class="label">Department</span>
+            <span>{{ user.department }}</span>
+          </div>
+
+          <div class="detail-item">
+            <span class="label">Member since</span>
+            <span>{{ user.createdAt | date:'mediumDate' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-actions>
+        <button mat-flat-button color="primary" (click)="openEditDialog()">
+          <mat-icon>edit</mat-icon> Edit User
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+} @else {
+  <div class="not-found">
+    <h2>User not found</h2>
+    <button mat-button (click)="goBack()">Back to Users</button>
+  </div>
+}

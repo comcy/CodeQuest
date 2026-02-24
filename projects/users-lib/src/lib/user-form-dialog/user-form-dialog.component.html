@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>{{ data.mode === 'create' ? 'Create User' : 'Edit User' }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" class="user-form">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" placeholder="Enter first name">
+      @if (form.get('firstName')?.hasError('required')) {
+        <mat-error>First name is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" placeholder="Enter last name">
+      @if (form.get('lastName')?.hasError('required')) {
+        <mat-error>Last name is required</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Enter email">
+      @if (form.get('email')?.hasError('required')) {
+        <mat-error>Email is required</mat-error>
+      }
+      @if (form.get('email')?.hasError('pattern')) {
+        <mat-error>Invalid email format</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="admin">Admin</mat-option>
+        <mat-option value="editor">Editor</mat-option>
+        <mat-option value="viewer">Viewer</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="department">
+        <mat-option value="Engineering">Engineering</mat-option>
+        <mat-option value="Marketing">Marketing</mat-option>
+        <mat-option value="Sales">Sales</mat-option>
+        <mat-option value="HR">HR</mat-option>
+        <mat-option value="Design">Design</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="isActive">
+      Active
+    </mat-slide-toggle>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSave()" [disabled]="form.invalid">
+    {{ data.mode === 'create' ? 'Create' : 'Save' }}
+  </button>
+</mat-dialog-actions>

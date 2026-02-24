@@ -1,0 +1,43 @@
+.detail-container {
+  padding: 24px;
+  max-width: 700px;
+}
+.user-card {
+  margin-top: 16px;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 16px 0;
+}
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.label {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.status-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 13px;
+  display: inline-block;
+  width: fit-content;
+}
+.status-badge.active {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+.status-badge.inactive {
+  background-color: #ffebee;
+  color: #c62828;
+}
+.not-found {
+  text-align: center;
+  padding: 64px;
+}

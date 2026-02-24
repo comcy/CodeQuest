@@ -1,52 +1,91 @@
-# CodeQuest
+# CodeQuest — User Management Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.5.
+A sample Angular application used as part of a technical interview for senior software developer candidates. The app is intentionally functional but contains a number of code-quality issues and bugs for the candidate to identify and fix.
+
+## Prerequisites
+
+- **Node.js** ≥ 20
+- **npm** ≥ 10
+- **Angular CLI** ≥ 21
+
+```bash
+npm install -g @angular/cli
+```
+
+## Installation
+
+```bash
+git clone <repository-url>
+cd CodeQuest
+npm install
+```
 
 ## Development server
-
-To start a local development server, run:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open [http://localhost:4200](http://localhost:4200). The app auto-reloads on file changes.
 
-## Code scaffolding
+## Project structure
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+CodeQuest/
+├── projects/
+│   ├── code-quest-app/          # Main application
+│   │   └── src/app/
+│   │       ├── dashboard/       # Dashboard page with stats
+│   │       ├── app.ts           # Root component
+│   │       ├── app.routes.ts    # Routing
+│   │       └── app.config.ts   # App providers (HTTP, animations)
+│   ├── shared-lib/              # Shared models, pipes, components, mock backend
+│   │   └── src/lib/
+│   │       ├── models/          # User model & types
+│   │       ├── interceptors/    # Mock API interceptor (replaces real backend)
+│   │       ├── components/      # ConfirmDialog, LoadingSpinner
+│   │       └── pipes/           # RoleBadgeColor, StatusLabel
+│   └── users-lib/               # User feature library
+│       └── src/lib/
+│           ├── services/        # UserService (CRUD via HttpClient)
+│           ├── user-list/       # User table with sort, filter, pagination
+│           ├── user-form-dialog/ # Create / edit dialog (Reactive Forms)
+│           └── user-detail/     # User detail view
+└── tsconfig.json                # Path aliases: shared-lib, users-lib → source
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Mock backend
 
-```bash
-ng generate --help
-```
+There is no real backend. HTTP calls are intercepted by `mockApiInterceptor` (in `shared-lib`) which handles all `/api/users` endpoints in-memory with 20 seeded users.
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This workspace runs **zoneless** (via `provideZonelessChangeDetection()` in `app.config.ts`), so the mock API returns **GET** responses synchronously to keep the UI reactive without Zone.js.
 
 ## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+Tests run with [Vitest](https://vitest.dev/) + jsdom.
 
-For end-to-end (e2e) testing, run:
+## Building
+
+```bash
+ng build
+```
+
+Build artifacts are placed in `dist/`.
+
+## Tech stack
+
+| | |
+|---|---|
+| Framework | Angular 21 (standalone components) |
+| UI library | Angular Material + CDK |
+| Forms | Reactive Forms |
+| HTTP | `HttpClient` with functional interceptor |
+| Tests | Vitest 4 |
+| Build | `@angular/build` (esbuild) |
 
 ```bash
 ng e2e

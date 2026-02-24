@@ -1,0 +1,39 @@
+.dashboard-container {
+  padding: 24px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  cursor: default;
+}
+.stat-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+.stat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+.stat-number {
+  font-size: 28px;
+  font-weight: 500;
+}
+.stat-label {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 13px;
+}
+.panels-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.panel-card {
+  min-height: 200px;
+}
