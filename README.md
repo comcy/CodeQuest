@@ -30,6 +30,9 @@ Open [http://localhost:4200](http://localhost:4200). The app auto-reloads on fil
 
 ## Project structure
 
+The project follows the angular workspace paradigm which supports multiple project. (Ref: https://angular.dev/reference/configs/file-structure)
+In this project we currently have a single application, a domain specific library and a shared-library.
+
 ```
 CodeQuest/
 ├── projects/
