@@ -15,7 +15,7 @@ npm install -g @angular/cli
 ## Installation
 
 ```bash
-git clone (https://github.com/comcy/CodeQuest)
+git clone https://github.com/comcy/CodeQuest
 cd CodeQuest
 npm install
 ```
