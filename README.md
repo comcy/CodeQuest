@@ -66,7 +66,9 @@ CodeQuest/
 
 ## Mock backend
 
-There is no real backend. HTTP calls are intercepted by `mockApiInterceptor` (in `shared-lib`) which handles all `/api/users` endpoints in-memory with 20 seeded users (`mock-data/users.data.ts`).
+> **No separate backend process is needed.** The mock backend runs entirely inside the browser as an Angular HTTP interceptor. Starting `ng serve` is sufficient — there is nothing else to start.
+
+HTTP calls are intercepted by `mockApiInterceptor` (in `shared-lib`) which handles all `/api/users` endpoints in-memory with 20 seeded users (`mock-data/users.data.ts`).
 
 The `ApiResponse<T>` discriminated union (`models/api-response.model.ts`) defines the shape of every response. The utility layers (`user-stats.utils.ts`, `user-transform.utils.ts`, `collection.utils.ts`) operate on this data without any Angular dependency — they are plain TypeScript.
 

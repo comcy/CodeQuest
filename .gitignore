@@ -42,3 +42,9 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Interviewer-only files — do not commit
+INTERVIEWER.pdf
+INTERVIEWER.md
+TYPESCRIPT_INTERVIEWER.*
+projects/shared-lib/src/lib/interviewer-tests/
