@@ -1,6 +1,6 @@
 # CodeQuest — User Management Dashboard
 
-A sample Angular application used as part of a technical interview for senior software developer candidates. The app is intentionally functional but contains a number of code-quality issues and bugs for the candidate to identify and fix.
+A sample Angular and TypeScript application used as part of a technical interview for senior software developer candidates. The app is intentionally functional but contains a number of code-quality issues and bugs — both Angular-specific and pure TypeScript — for the candidate to identify and fix.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ npm install -g @angular/cli
 ## Installation
 
 ```bash
-git clone <repository-url>
+git clone (https://github.com/comcy/CodeQuest)
 cd CodeQuest
 npm install
 ```
@@ -30,8 +30,8 @@ Open [http://localhost:4200](http://localhost:4200). The app auto-reloads on fil
 
 ## Project structure
 
-The project follows the angular workspace paradigm which supports multiple project. (Ref: https://angular.dev/reference/configs/file-structure)
-In this project we currently have a single application, a domain specific library and a shared-library.
+The project follows the Angular workspace paradigm which supports multiple projects. (Ref: https://angular.dev/reference/configs/file-structure)
+In this project we have a single application, a domain-specific feature library (`users-lib`) and a shared library (`shared-lib`). The shared library contains both Angular-specific code (components, pipes, interceptor) and framework-agnostic TypeScript utilities (models, collection helpers, type utilities, stats and transform functions).
 
 ```
 CodeQuest/
@@ -41,10 +41,17 @@ CodeQuest/
 │   │       ├── dashboard/       # Dashboard page with stats
 │   │       ├── app.ts           # Root component
 │   │       ├── app.routes.ts    # Routing
-│   │       └── app.config.ts   # App providers (HTTP, animations)
-│   ├── shared-lib/              # Shared models, pipes, components, mock backend
+│   │       └── app.config.ts    # App providers (HTTP, animations)
+│   ├── shared-lib/              # Shared models, utils, pipes, components, mock backend
 │   │   └── src/lib/
-│   │       ├── models/          # User model & types
+│   │       ├── models/          # User model & types, API response types
+│   │       │   ├── user.model.ts
+│   │       │   └── api-response.model.ts
+│   │       ├── utils/           # TypeScript utility helpers
+│   │       │   ├── collection.utils.ts
+│   │       │   ├── type.utils.ts
+│   │       │   ├── user-stats.utils.ts
+│   │       │   └── user-transform.utils.ts
 │   │       ├── interceptors/    # Mock API interceptor (replaces real backend)
 │   │       ├── components/      # ConfirmDialog, LoadingSpinner
 │   │       └── pipes/           # RoleBadgeColor, StatusLabel
@@ -59,7 +66,9 @@ CodeQuest/
 
 ## Mock backend
 
-There is no real backend. HTTP calls are intercepted by `mockApiInterceptor` (in `shared-lib`) which handles all `/api/users` endpoints in-memory with 20 seeded users.
+There is no real backend. HTTP calls are intercepted by `mockApiInterceptor` (in `shared-lib`) which handles all `/api/users` endpoints in-memory with 20 seeded users (`mock-data/users.data.ts`).
+
+The `ApiResponse<T>` discriminated union (`models/api-response.model.ts`) defines the shape of every response. The utility layers (`user-stats.utils.ts`, `user-transform.utils.ts`, `collection.utils.ts`) operate on this data without any Angular dependency — they are plain TypeScript.
 
 This workspace runs **zoneless** (via `provideZonelessChangeDetection()` in `app.config.ts`), so the mock API returns **GET** responses synchronously to keep the UI reactive without Zone.js.
 
@@ -83,11 +92,12 @@ Build artifacts are placed in `dist/`.
 
 | | |
 |---|---|
-| Framework | Angular 21 (standalone components) |
+| Framework | Angular 21 (standalone components, zoneless) |
+| Language | TypeScript 5 (strict mode, `noImplicitAny`, `noImplicitReturns`) |
 | UI library | Angular Material + CDK |
 | Forms | Reactive Forms |
 | HTTP | `HttpClient` with functional interceptor |
-| Tests | Vitest 4 |
+| Tests | Vitest 4 + jsdom |
 | Build | `@angular/build` (esbuild) |
 
 ```bash

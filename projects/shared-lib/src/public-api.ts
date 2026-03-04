@@ -4,6 +4,13 @@
 
 // Models
 export * from './lib/models/user.model';
+export * from './lib/models/api-response.model';
+
+// Utils
+export * from './lib/utils/collection.utils';
+export * from './lib/utils/type.utils';
+export * from './lib/utils/user-stats.utils';
+export * from './lib/utils/user-transform.utils';
 
 // Interceptors
 export { mockApiInterceptor } from './lib/interceptors/mock-api.interceptor';

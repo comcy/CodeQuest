@@ -35,6 +35,29 @@ export class UserFormDialogComponent implements OnInit {
   private dialogRef = inject(MatDialogRef<UserFormDialogComponent>);
   private fb = inject(FormBuilder);
 
+  /**
+   * TS-CHALLENGE-6 ─ Typed Reactive Forms
+   *
+   * Angular supports *strongly-typed* reactive forms since v14. The current
+   * declaration uses the legacy untyped `FormGroup`, which means `.value` and
+   * `.controls` are typed as `any`.
+   *
+   * Task A – Type the form:
+   *   Replace `FormGroup` with a fully-typed equivalent.
+   *   Import `FormModel` and `UserFormFields` from `shared-lib/utils/type.utils`
+   *   and declare the property as:
+   *
+   *     form!: FormGroup<FormModel<UserFormFields>>;
+   *
+   *   Adjust `fb.group(...)` accordingly so the compiler infers the correct
+   *   control types without any casts.
+   *
+   * Task B – Fix the edit-mode bug:
+   *   When `mode === 'edit'` the form is built but never populated with the
+   *   existing user's values, so the dialog always opens blank.
+   *   Fix `ngOnInit` so that editing a user pre-fills every form control with
+   *   the user's current data.
+   */
   form!: FormGroup;
 
   ngOnInit(): void {
